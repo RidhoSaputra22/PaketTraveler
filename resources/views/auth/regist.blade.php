@@ -1,7 +1,10 @@
 <x-app>
-    <section class="h-screen bg-cover bg-blue-400"
-        style="background-image: url('{{ URL::asset('image/banner-1.jpg') }}')">
-        <div class="h-screen flex flex-col justify-center items-center ">
+    <section class="h-screen bg-cover "
+        style="background-image: url('{{ URL::asset('images/banner-1.jpg') }}')">
+        <div class="absolute h-screen w-full bg-black opacity-[60%]">
+
+        </div>
+        <div class="absolute w-full h-screen flex flex-col justify-center items-center ">
             <div class="w-[500px] h-auto rounded-xl flex shadow-xl">
                 <div class="p-10 w-full grow flex flex-col bg-white">
                     <div class="text-2xl font-semibold flex justify-center">Register</div>
@@ -48,7 +51,7 @@
                         </div>
 
                         <div>
-                            <button type="submit" class="bg-blue-400 text-white p-2 rounded px-4 border">Register</b>
+                            <button type="submit" class="bg-blue-900 text-white p-2 rounded px-4 border">Register</b>
 
                         </div>
                     </form>

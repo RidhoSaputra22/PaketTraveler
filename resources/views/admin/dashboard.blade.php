@@ -32,7 +32,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($datas['jadwal'] as $jadwalTreatment)
+                    {{-- @forelse($datas['jadwal'] as $jadwalTreatment)
                     <tr class="hover:bg-slate-100">
                         <td class="text-sm text-center border">{{ $jadwalTreatment->pasien['nama'] }}</td>
                         <td class="text-sm text-center border">{{ $jadwalTreatment->dokter['nama'] }}</td>
@@ -54,13 +54,13 @@
                         @empty
                         <td>Tak Ada Data</td>
                     </tr>
-                    @endforelse
+                    @endforelse --}}
 
                 </tbody>
             </table>
         </div>
 
     </div>
-  
+
 
 </x-admin-app>

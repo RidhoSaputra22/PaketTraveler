@@ -35,13 +35,10 @@
             </div>
         </div>
     </section>
-    <section class="min-h-36 px-32 py-3 ">
-        <div class="flex h-36  ">
-            <div class="bg-white h-full flex-1 flex items-center px-5 gap-5 border-white-900 border-r-2">
-                <div class="">
-                    <div class="h-14 w-14 shadow-lg border bg-white-900 rounded-sm ">
-                    </div>
-                </div>
+    <section class="min-h-36 px-32 pt-9 ">
+        <div class="flex h-36 border shadow-lg px-14">
+            <div class="bg-white h-full flex-1 flex items-center px-5 gap-5  ">
+
                 <div class="w-full">
                     <div>Pilih Destinasi</div>
                     <select name="destinasi" id="" class="w-full rounded p-1">
@@ -52,10 +49,7 @@
                 </div>
             </div>
             <div class="bg-white h-full flex-1 flex items-center px-5 gap-5 border-white-900 border-r-2">
-                <div class="">
-                    <div class="h-14 w-14 shadow-lg border bg-white-900 rounded-sm">
-                    </div>
-                </div>
+
                 <div class="w-full">
                     <div>Pilih Destinasi</div>
                     <select name="destinasi" id="" class="w-full rounded p-1">
@@ -66,10 +60,7 @@
                 </div>
             </div>
             <div class="bg-white h-full flex-1 flex items-center px-5 gap-5 border-white-900 border-r-2">
-                <div class="">
-                    <div class="h-14 w-14 shadow-lg border bg-white-900 rounded-sm">
-                    </div>
-                </div>
+
                 <div class="w-full">
                     <div>Pilih Destinasi</div>
                     <select name="destinasi" id="" class="w-full rounded p-1">
@@ -97,13 +88,25 @@
             </div>
             <div>
                 <div class="grid grid-cols-4 gap-3">
+                    <a href="/detail" class="">
+                        <div class="  shadow-lg w-full h-90 bg-cover bg-center rounded flex flex-col justify-end "
+                            style="background-image: url('{{ URL::asset('images/banner-3.jpg') }}');">
+                            <div class="h-36 rounded-t-xl rounded-b bg-white p-3 flex flex-col">
+                                <span>⭐⭐⭐⭐</span>
+                                <span class="text-lg font-semibold">Lorem, ipsum dolor.</span>
+                                <span class="text-sm font-light">Lorem ipsum, dolor sit amet consectetur adipisicing
+                                    elit. Placeat, exercitationem.</span>
+                            </div>
+                        </div>
+                    </a>
                     <a href="#" class="">
                         <div class="  shadow-lg w-full h-90 bg-cover bg-center rounded flex flex-col justify-end "
                             style="background-image: url('{{ URL::asset('images/banner-3.jpg') }}');">
                             <div class="h-36 rounded-t-xl rounded-b bg-white p-3 flex flex-col">
                                 <span>⭐⭐⭐⭐</span>
                                 <span class="text-lg font-semibold">Lorem, ipsum dolor.</span>
-                                <span class="text-sm font-light">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat, exercitationem.</span>
+                                <span class="text-sm font-light">Lorem ipsum, dolor sit amet consectetur adipisicing
+                                    elit. Placeat, exercitationem.</span>
                             </div>
                         </div>
                     </a>
@@ -113,7 +116,8 @@
                             <div class="h-36 rounded-t-xl rounded-b bg-white p-3 flex flex-col">
                                 <span>⭐⭐⭐⭐</span>
                                 <span class="text-lg font-semibold">Lorem, ipsum dolor.</span>
-                                <span class="text-sm font-light">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat, exercitationem.</span>
+                                <span class="text-sm font-light">Lorem ipsum, dolor sit amet consectetur adipisicing
+                                    elit. Placeat, exercitationem.</span>
                             </div>
                         </div>
                     </a>
@@ -123,7 +127,8 @@
                             <div class="h-36 rounded-t-xl rounded-b bg-white p-3 flex flex-col">
                                 <span>⭐⭐⭐⭐</span>
                                 <span class="text-lg font-semibold">Lorem, ipsum dolor.</span>
-                                <span class="text-sm font-light">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat, exercitationem.</span>
+                                <span class="text-sm font-light">Lorem ipsum, dolor sit amet consectetur adipisicing
+                                    elit. Placeat, exercitationem.</span>
                             </div>
                         </div>
                     </a>
