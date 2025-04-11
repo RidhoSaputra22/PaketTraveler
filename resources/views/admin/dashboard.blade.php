@@ -16,7 +16,7 @@
         <table id="pegawaiTable" class="w-full text-white">
             <thead class="bg-slate-950 " style="border-radius: 50px">
                 <tr class="">
-                    <th class="font-semibold p-1">No.</th>
+                    <th class="font-semibold p-1">No. 1</th>
                     <th class="font-semibold p-1">Nama</th>
                     <th class="font-semibold p-1">Email</th>
                     <th class="font-semibold p-1">Department</th>
