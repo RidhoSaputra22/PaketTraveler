@@ -21,7 +21,7 @@
                     <th class="font-semibold p-1">Email</th>
                     <th class="font-semibold p-1">Department</th>
                     <th class="font-semibold p-1">Role</th>
-                    <th class="font-semibold p-1">Actions u</th>
+                    <th class="font-semibold p-1">Actions ud</th>
                 </tr>
             </thead>
             <tbody class="bg-slate-800 text-center">
