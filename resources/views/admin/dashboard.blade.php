@@ -12,51 +12,9 @@
                 </div>
             </div>
         </div>
-
-        <table id="pegawaiTable" class="w-full text-white">
-            <thead class="bg-slate-950 " style="border-radius: 50px">
-                <tr class="">
-                    <th class="font-semibold p-1">No. 11</th>
-                    <th class="font-semibold p-1">Nama</th>
-                    <th class="font-semibold p-1">Email</th>
-                    <th class="font-semibold p-1">Department</th>
-                    <th class="font-semibold p-1">Role</th>
-                    <th class="font-semibold p-1">Actions</th>
-                </tr>
-            </thead>
-            <tbody class="bg-slate-800 text-center">
-                <tr>
-                    <td>1</td>
-                    <td>John Doe</td>
-                    <td>o7o8M@example.com</td>
-                    <td>IT</td>
-                    <td>Admin</td>
-                    <td>adsd</td>
-                </tr>
-                {{-- @foreach ($datas as $index => $data)
-                    <tr>
-                        <td>{{ $index + 1 }}</td>
-                        <td>{{ $data['nama'] }}</td>
-                        <td>{{ $data['email'] }}</td>
-                        <td>{{ $data->departement['departement'] }}</td>
-                        <td>{{ $data['role'] }}</td>
-
-                        <td>
-                            <div class="flex gap-3">
-                                <div class="flex gap-3">
-                                    <a href="{{ route('anggota.show', $data['id_user']) }}" class="px-5 py-2 bg-blue-500 text-white">Lihat Data</a>
-                                 </div>
-
-                            </div>
-
-                        </td>
-                    </tr>
-
-                @endforeach --}}
-            </tbody>
-        </table>
-
-
+        <div>
+            <livewire:users-table />
+        </div>
 
 
     </section>
