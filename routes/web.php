@@ -17,23 +17,10 @@ Route::get('/paket-travel', function () {
 });
 
 Route::get('/admin/dashboard', function () {
-    $datas = [
-        "produk_dipesan" => 20,
-        "jumlah_produk" => 20,
-        "jumlah_pasien" => 20,
-    ];
-
-
-
-
-    return view('admin.dashboard', compact('datas'));
+    return view('admin.dashboard');
 });
 
-// Route::middleware(['admin'])->group(function () {
-//     Route::resource('admin/anggota', UserController::class);
-//     Route::get('admin/dashboard', [UserController::class, 'dashboard'])->name('admin.dashboard');
-//     Route::get('admin/print', [UserController::class, 'print'])->name('admin.print');
-// });
+
 
 Route::get('/login', [CustomAuthController::class, 'login'])->name('login');
 Route::get('/regist', [CustomAuthController::class, 'regist']);

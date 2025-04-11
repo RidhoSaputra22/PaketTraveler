@@ -1,0 +1,142 @@
+<x-admin-app>
+    <section class="w-full">
+
+        @if (session('sukses'))
+            <div class="h-14 w-full bg-green-400 my-2 p-4 ">
+                {{session('sukses')}}
+            </div>
+        @endif
+
+        <div class="pb-3">
+            <a href="{{ route('anggota.create') }}" class="px-5 py-2 border  shadow-xl">Tambah Data</a>
+            <x-modal-button id-modal="filter-modal" class="px-5 py-2 border  shadow-xl">
+                Filter
+            </x-modal-button>
+        </div>
+
+
+        <div class=" item-center w-full">
+            <table id="pegawaiTable" class="display w-full">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Nama</th>
+                        <th>Email</th>
+                        <th>Department</th>
+                        <th>Role</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($datas as $index => $data)
+                        <tr>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $data['nama'] }}</td>
+                            <td>{{ $data['email'] }}</td>
+                            <td>{{ $data->departement['departement'] }}</td>
+                            <td>{{ $data['role'] }}</td>
+
+                            <td>
+                                <div class="flex gap-3">
+                                   <a href="{{ route('anggota.show', $data['id_user']) }}" class="px-5 py-2 bg-blue-500 text-white">Lihat Data</a>
+                                </div>
+
+                            </td>
+                        </tr>
+
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
+        <x-modal id-modal="filter-modal">
+            <form>
+
+                <x-modal-header id-modal="filter-modal">
+                    <h3 class=" uppercase text-xl font-semibold text-gray-900 dark:text-white">
+                        filters
+                    </h3>
+                </x-modal-header>
+                <x-modal-body>
+                    <div class="py-2 flex gap-3 items-center print:hidden ">
+                        <div class="flex-1">
+                            <h1>Pilihan</h1>
+                            <select name="pilihan" id="" class="p-2 border w-full">
+                                <option value="1" {{ $request->pilihan == "1" ? 'selected' : '' }}>Harian</option>
+                                <option value="2" {{ $request->pilihan == "2" ? 'selected' : '' }}>Mingguan</option>
+                                <option value="3" {{ $request->pilihan == "3" ? 'selected' : '' }}>Bulanan</option>
+                                <option value="" {{ $request->pilihan == "" ? 'selected' : '' }}>Semua</option>
+                            </select>
+                        </div>
+                        <div class="flex-1">
+                            <h1>Hari</h1>
+                            <input type="number" name="hari" id="" min="0" value="{{$request->hari ?? 0}}"
+                                class="p-2 border w-full">
+                        </div>
+
+
+                        <div class="flex-1">
+                            <h1>Bulan</h1>
+                            <select name="bulan" id="" class="p-2 border w-full">
+                                <option value="1" {{ $request->bulan == "1" ? 'selected' : '' }}>January</option>
+                                <option value="2" {{ $request->bulan == "2" ? 'selected' : '' }}>February</option>
+                                <option value="3" {{ $request->bulan == "3" ? 'selected' : '' }}>Maret</option>
+                                <option value="4" {{ $request->bulan == "4" ? 'selected' : '' }}>April</option>
+                                <option value="5" {{ $request->bulan == "5" ? 'selected' : '' }}>Mei</option>
+                                <option value="6" {{ $request->bulan == "6" ? 'selected' : '' }}>Juni</option>
+                                <option value="7" {{ $request->bulan == "7" ? 'selected' : '' }}>Juli</option>
+                                <option value="8" {{ $request->bulan == "8" ? 'selected' : '' }}>Agustus</option>
+                                <option value="9" {{ $request->bulan == "9" ? 'selected' : '' }}>September</option>
+                                <option value="10" {{ $request->bulan == "10" ? 'selected' : '' }}>Oktober</option>
+                                <option value="11" {{ $request->bulan == "11" ? 'selected' : '' }}>November</option>
+                                <option value="12" {{ $request->bulan == "12" ? 'selected' : '' }}>Desember</option>
+                            </select>
+                        </div>
+                        <div class="flex-1">
+                            <h1>Tahun</h1>
+                            <select name="tahun" id="" class="p-2 border w-full">
+                                <option value="2020" {{ $request->tahun == "2020" ? 'selected' : '' }}>2020</option>
+                                <option value="2021" {{ $request->tahun == "2021" ? 'selected' : '' }}>2021</option>
+                                <option value="2022" {{ $request->tahun == "2022" ? 'selected' : '' }}>2022</option>
+                                <option value="2023" {{ $request->tahun == "2023" ? 'selected' : '' }}>2023</option>
+                                <option value="2024" {{ $request->tahun == "2024" ? 'selected' : '' }}>2024</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                </x-modal-body>
+                <x-modal-footer>
+                    <div class="flex gap-3 ">
+                        <button class="px-4 py-2 border bg-slate-600 text-white">Submit</button>
+                    </div>
+                </x-modal-footer>
+            </form>
+        </x-modal>
+
+    </section>
+    <script>
+        const table = $('#pegawaiTable').DataTable({
+            // Tailwind CSS classes
+            layout: {
+                topEnd: false,
+                bottomEnd: false,
+                bottomStart: false,
+                topStart: {
+                    search: {
+                        placeholder: 'Search...'
+                    }
+                },
+
+            },
+
+            lengthMenu: [
+                [-1],
+
+            ],
+
+            // Responsive design
+            responsive: false
+        });
+    </script>
+</x-admin-app>
