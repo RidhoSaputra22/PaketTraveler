@@ -19,8 +19,8 @@ class TransaksiFactory extends Factory
     public function definition(): array
     {
         return [
-            'id_paket_212396' => PaketTravel::create(),
-            'id_user_212396' => User::create(),
+            'id_paket_212396' => PaketTravel::factory()->create(),
+            'id_user_212396' => User::factory()->create(),
             'status_212396' => 'pending',
             'kode_212396' => fake()->uuid(),
             'kode_midtrans_212396' => fake()->uuid(),

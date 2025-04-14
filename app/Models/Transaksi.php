@@ -22,4 +22,15 @@ class Transaksi extends Model
         'jumlah_orang_212396',
         'total_harga_212396'
     ];
+
+    public function paket()
+    {
+        return $this->belongsTo(PaketTravel::class, 'id_paket_212396');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user_212396');
+    }
+
 }

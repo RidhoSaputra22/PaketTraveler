@@ -18,7 +18,6 @@ return new class extends Migration
             $table->text('deskripsi_212396');
             $table->text('thumbnail_212396');
             $table->double('harga_212396');
-            $table->integer('durasi_212396');
             $table->dateTime('tanggal_berangkat_212396');
             $table->dateTime('tanggal_pulang_212396');
             $table->string('lokasi_212396');

@@ -23,7 +23,6 @@ class PaketTravelFactory extends Factory
             'deskripsi_212396' => fake()->text(),
             'thumbnail_212396' => fake()->imageUrl(),
             'harga_212396' => fake()->numberBetween(100000, 1000000),
-            'durasi_212396' => fake()->numberBetween(1, 10),
             'tanggal_berangkat_212396' => fake()->dateTime(),
             'tanggal_pulang_212396' => fake()->dateTime(),
             'lokasi_212396' => fake()->city(),

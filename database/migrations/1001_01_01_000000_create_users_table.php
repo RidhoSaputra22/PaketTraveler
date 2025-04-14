@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('email_212396')->unique();
             $table->string('password_212396');
             $table->string('hp_212396');
-            $table->string('role_212396');
             $table->timestamps();
         });
 
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('users_212396');
     }
 };

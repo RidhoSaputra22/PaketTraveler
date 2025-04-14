@@ -20,10 +20,21 @@ class PaketTravel extends Model
         'deskripsi_212396',
         'thumbnail_212396',
         'harga_212396',
-        'durasi_212396',
         'tanggal_berangkat_212396',
         'tanggal_pulang_212396',
         'lokasi_212396'
     ];
 
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'id_kategori_212396');
+    }
+
+    public function fasilitas(){
+        return $this->hasMany(FasilitasPaket::class, 'id_paket_212396');
+    }
+
+    public function galleri(){
+        return $this->hasMany(Galleri::class, 'id_paket_212396');
+    }
 }

@@ -18,4 +18,12 @@ class Galleri extends Model
         'path_212396'
     ];
 
+    protected $casts = [
+        'path_212396' => 'array',
+    ];
+
+
+    public function paket(){
+        return $this->belongsTo(PaketTravel::class, 'id_paket_212396');
+    }
 }

@@ -18,5 +18,9 @@ class FasilitasPaket extends Model
         'fasilitas_212396'
     ];
 
+    public function paket(){
+        return $this->belongsTo(PaketTravel::class, 'id_paket_212396');
+    }
+
 
 }

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('id_transaksi_212396');
             $table->unsignedBigInteger('id_paket_212396');
             $table->unsignedBigInteger('id_user_212396');
-            $table->enum('status_212396', ['pending', 'lunas', 'batal']);
+            $table->enum('status_212396', ['pending', 'success', 'failed']);
             $table->text('kode_212396');
             $table->text('kode_midtrans_212396');
             $table->integer('jumlah_orang_212396');

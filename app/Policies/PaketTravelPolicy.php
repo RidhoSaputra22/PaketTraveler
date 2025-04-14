@@ -2,65 +2,65 @@
 
 namespace App\Policies;
 
+use App\Models\Admin;
 use App\Models\PaketTravel;
-use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
 class PaketTravelPolicy
 {
     /**
-     * Determine whether the user can view any models.
+     * Determine whether the Admin can view any models.
      */
-    public function viewAny(User $user): bool
+    public function viewAny(Admin $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
-     * Determine whether the user can view the model.
+     * Determine whether the Admin can view the model.
      */
-    public function view(User $user, PaketTravel $paketTravel): bool
+    public function view(Admin $user, PaketTravel $paketTravel): bool
     {
-        return false;
+        return true;
     }
 
     /**
-     * Determine whether the user can create models.
+     * Determine whether the Admin can create models.
      */
-    public function create(User $user): bool
+    public function create(Admin $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
-     * Determine whether the user can update the model.
+     * Determine whether the Admin can update the model.
      */
-    public function update(User $user, PaketTravel $paketTravel): bool
+    public function update(Admin $user, PaketTravel $paketTravel): bool
     {
-        return false;
+        return true;
     }
 
     /**
-     * Determine whether the user can delete the model.
+     * Determine whether the Admin can delete the model.
      */
-    public function delete(User $user, PaketTravel $paketTravel): bool
+    public function delete(Admin $user, PaketTravel $paketTravel): bool
     {
-        return false;
+        return true;
     }
 
     /**
-     * Determine whether the user can restore the model.
+     * Determine whether the Admin can restore the model.
      */
-    public function restore(User $user, PaketTravel $paketTravel): bool
+    public function restore(Admin $user, PaketTravel $paketTravel): bool
     {
-        return false;
+        return true;
     }
 
     /**
-     * Determine whether the user can permanently delete the model.
+     * Determine whether the Admin can permanently delete the model.
      */
-    public function forceDelete(User $user, PaketTravel $paketTravel): bool
+    public function forceDelete(Admin $user, PaketTravel $paketTravel): bool
     {
-        return false;
+        return true;
     }
 }
