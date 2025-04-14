@@ -10,7 +10,7 @@
              <div class="hidden md:flex items-center gap-14">
                  <a href="/"
                      class=" text-black hover:underline transition duration-300">Beranda</a>
-                 <a href="/paket-travel"
+                 <a href="/paket"
                      class=" text-black hover:underline transition duration-300">Paket Travel</a>
                  <a href="/login"
                      class=" text-black bg-blue-900 hover:bg-blue-50 transition duration-300  rounded-sm py-1 px-5 text-white">Login</a>

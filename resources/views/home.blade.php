@@ -35,103 +35,90 @@
             </div>
         </div>
     </section>
-    <section class="min-h-36 px-32 pt-9 ">
-        <div class="flex h-36 border shadow-lg px-14">
-            <div class="bg-white h-full flex-1 flex items-center px-5 gap-5  ">
+    <section class="min-h-36 px-32 pt-9" id="cari">
+        <form action="#cari" method="get">
+            <div class="flex h-36 border shadow-lg px-14">
+                <div class="bg-white h-full flex-1 flex items-center px-5 gap-5  ">
+                    <div class="w-full">
+                        <div>Pilih Destinasi</div>
+                        <select name="lokasi" id="" class="w-full rounded p-1"  >
+                            <option value="">Semua Lokasi</option>
+                            @forelse ($lokasis as $lokasi => $paket)
+                                <option value="{{ $lokasi }}" {{ $request->lokasi == $lokasi ? 'selected' : '' }}>{{ $lokasi }}</option>
+                            @empty
+                            @endforelse
 
-                <div class="w-full">
-                    <div>Pilih Destinasi</div>
-                    <select name="destinasi" id="" class="w-full rounded p-1">
-                        <option value="destinasi">Destinasi 1</option>
-                        <option value="destinasi">Destinasi 2</option>
-                        <option value="destinasi">Destinasi 3</option>
-                    </select>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="bg-white h-full flex-1 flex items-center px-5 gap-5 border-white-900 border-r-2">
+                <div class="bg-white h-full flex-1 flex items-center px-5 gap-5 border-white-900 border-r-2">
 
-                <div class="w-full">
-                    <div>Pilih Destinasi</div>
-                    <select name="destinasi" id="" class="w-full rounded p-1">
-                        <option value="destinasi">Destinasi 1</option>
-                        <option value="destinasi">Destinasi 2</option>
-                        <option value="destinasi">Destinasi 3</option>
-                    </select>
+                    <div class="w-full">
+                        <div>Pilih Durasi Keberangkatan</div>
+                        <select name="durasi" id="" class="w-full rounded p-1"  >
+                            <option value="">Semua Durasi</option>
+                            @forelse ($durasis as $durasi => $paket)
+                                <option value="{{ $durasi }}" {{ $request->durasi == $durasi ? 'selected' : '' }}>{{ $durasi }} Hari</option>
+                            @empty
+                            @endforelse
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="bg-white h-full flex-1 flex items-center px-5 gap-5 border-white-900 border-r-2">
+                <div class="bg-white h-full flex-1 flex items-center px-5 gap-5 border-white-900 border-r-2">
 
-                <div class="w-full">
-                    <div>Pilih Destinasi</div>
-                    <select name="destinasi" id="" class="w-full rounded p-1">
-                        <option value="destinasi">Destinasi 1</option>
-                        <option value="destinasi">Destinasi 2</option>
-                        <option value="destinasi">Destinasi 3</option>
-                    </select>
+                    <div class="w-full">
+                        <div>Pilih Kategori Paket</div>
+                        <select name="kategori" id="" class="w-full rounded p-1"  >
+                            <option value="">Semua Kategori</option>
+                            @forelse ($kategoris as $kategori)
+                                <option value="{{ $kategori['kategori_212396'] }}" {{ $request->kategori == $kategori['kategori_212396'] ? 'selected' : '' }}>{{ $kategori['kategori_212396'] }} Hari</option>
+                            @empty
+                            @endforelse
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="bg-white h-full flex-1 flex items-center px-5 pt-3  border-r-2">
-                <button class="w-full bg-blue-900 text-white px-5 py-2">Cari Destinasi</button>
+                <div class="bg-white h-full flex-1 flex items-center px-5 pt-3  border-r-2">
+                    <button type="submit" class="w-full bg-blue-900 text-white px-5 py-2">Cari Destinasi</button>
+
+                </div>
 
             </div>
 
-        </div>
+        </form>
     </section>
     <section class="min-h-screen px-36 py-10">
         <div class="w-full h-full p-10">
             <div class="w-full h-auto flex pb-5 ">
                 <div class="text-xl flex-1">Destinasi Populer</div>
-                <div class="w-1/4 flex gap-3">
-                    <input type="text" class="p-1 rounded-sm border border-black  w-full ">
+                <form action="/paket" method="get" class="w-1/4 flex gap-3">
+                    <input type="text" name="search" class="p-1 rounded-sm border border-black  w-full " required>
                     <button class="px-5 py-1 rounded-sm bg-blue-900 text-white">Cari</button>
-                </div>
+                </form>
             </div>
             <div>
                 <div class="grid grid-cols-4 gap-3">
-                    <a href="/detail" class="">
-                        <div class="  shadow-lg w-full h-90 bg-cover bg-center rounded flex flex-col justify-end "
-                            style="background-image: url('{{ URL::asset('images/banner-3.jpg') }}');">
-                            <div class="h-36 rounded-t-xl rounded-b bg-white p-3 flex flex-col">
-                                <span>⭐⭐⭐⭐</span>
-                                <span class="text-lg font-semibold">Lorem, ipsum dolor.</span>
-                                <span class="text-sm font-light">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                    elit. Placeat, exercitationem.</span>
+                    @forelse ($pakets as $paket)
+                        <a href="/detail/{{ $paket->getId() }}" class="">
+                            <div class="  shadow-lg w-full h-90 bg-bottom bg-cover bg-no-repeat  rounded flex flex-col justify-end "
+                                style="background-image: url('{{ Storage::url($paket->getThumbnail()) }}');">
+                                <div class="h-40 rounded-t-xl rounded-b bg-white p-3 flex flex-col">
+                                    <div class="flex items-center">
+                                        <div class="flex text-yellow-400">
+                                            {{ str_repeat('⭐', $paket->getRating()) }}
+                                        </div>
+                                        <span class="text-gray-600 ml-2">{{ $paket->getRating() / 5 }}</span>
+                                    </div>
+                                    <span class="text-lg font-semibold">{{ $paket->getNama() }}</span>
+                                    <span
+                                        class="text-sm font-light">{{ Str::limit($paket->getDeskripsi(), 70) }}</span>
+                                    <span class="text-lg">Rp. {{ number_format($paket->getHarga()) }}</span>
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                    <a href="#" class="">
-                        <div class="  shadow-lg w-full h-90 bg-cover bg-center rounded flex flex-col justify-end "
-                            style="background-image: url('{{ URL::asset('images/banner-3.jpg') }}');">
-                            <div class="h-36 rounded-t-xl rounded-b bg-white p-3 flex flex-col">
-                                <span>⭐⭐⭐⭐</span>
-                                <span class="text-lg font-semibold">Lorem, ipsum dolor.</span>
-                                <span class="text-sm font-light">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                    elit. Placeat, exercitationem.</span>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#" class="">
-                        <div class="  shadow-lg w-full h-90 bg-cover bg-center rounded flex flex-col justify-end "
-                            style="background-image: url('{{ URL::asset('images/banner-1.jpg') }}');">
-                            <div class="h-36 rounded-t-xl rounded-b bg-white p-3 flex flex-col">
-                                <span>⭐⭐⭐⭐</span>
-                                <span class="text-lg font-semibold">Lorem, ipsum dolor.</span>
-                                <span class="text-sm font-light">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                    elit. Placeat, exercitationem.</span>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#" class="">
-                        <div class="  shadow-lg w-full h-90 bg-cover bg-center rounded flex flex-col justify-end "
-                            style="background-image: url('{{ URL::asset('images/banner-2.jpg') }}');">
-                            <div class="h-36 rounded-t-xl rounded-b bg-white p-3 flex flex-col">
-                                <span>⭐⭐⭐⭐</span>
-                                <span class="text-lg font-semibold">Lorem, ipsum dolor.</span>
-                                <span class="text-sm font-light">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                    elit. Placeat, exercitationem.</span>
-                            </div>
-                        </div>
-                    </a>
+                        </a>
+
+                    @empty
+                        <h3>Tak ada data</h3>
+                    @endforelse
 
                 </div>
 
@@ -141,30 +128,6 @@
     </section>
     <x-footter></x-footter>
 
-    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-Sh3wGKHVSP3NM6lF"></script>
-    @if (session('token'))
-        <script type="text/javascript">
-            // SnapToken acquired from previous step
-            snap.pay('{{ session('token')['snap'] }}', {
-                // Optional
-                onSuccess: function(result) {
-                    /* You may add your own js here, this is just example */
 
-                    window.location.href = "/checkout/{{ session('token')['id_jadwal'] }}"
-
-                },
-                // Optional
-                onPending: function(result) {
-                    /* You may add your own js here, this is just example */
-                    document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-                },
-                // Optional
-                onError: function(result) {
-                    /* You may add your own js here, this is just example */
-                    document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-                }
-            });
-        </script>
-    @endif
 
 </x-app>

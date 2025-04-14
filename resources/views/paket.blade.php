@@ -99,12 +99,11 @@
             </div>
             <div class="p-3 mt-3">
                 <ul class="flex flex-col gap-3 ">
-                    <span>#asdasd</span>
-                    {{-- @foreach ($kategori as $data)
+                    @foreach ($kategori as $data)
 
-                        <a href="?kategori={{ $data['222118_id_kategori']}}">{{ $data['kategori'] }}</a>
+                        <a href="?kategori={{ $data['id_kategori_212396']}}">{{ $data['kategori_212396'] }}</a>
 
-                    @endforeach --}}
+                    @endforeach
 
                 </ul>
             </div>
@@ -112,59 +111,31 @@
         <div class=" h-full w-full ">
             <form class="h-14 bg-white flex justify-center ">
                 <input type="text" name="search" class="p-4 w-full mx-32 rounded m-2 border-yellow border"
-                    placeholder="Cari Menu...">
+                    placeholder="Cari Menu..." value="{{ $request->search }}">
             </form>
             <div class="grid grid-cols-3 h-96 gap-3 m-7 h-full">
-                <a href="/detail" class="">
-                    <div class="  shadow-lg w-full h-90 bg-cover bg-center rounded flex flex-col justify-end "
-                        style="background-image: url('{{ URL::asset('images/banner-3.jpg') }}');">
-                        <div class="h-36 rounded-t-xl rounded-b bg-white p-3 flex flex-col">
-                            <span>⭐⭐⭐⭐</span>
-                            <span class="text-lg font-semibold">Lorem, ipsum dolor.</span>
-                            <span class="text-sm font-light">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                elit. Placeat, exercitationem.</span>
+                @forelse ($pakets as $paket)
+                <a href="/detail/{{ $paket->getId() }}" class="">
+                    <div class="  shadow-lg w-full h-90 bg-bottom bg-cover bg-no-repeat  rounded flex flex-col justify-end "
+                        style="background-image: url('{{ Storage::url($paket->getThumbnail()) }}');">
+                        <div class="h-40 rounded-t-xl rounded-b bg-white p-3 flex flex-col">
+                            <div class="flex items-center">
+                                <div class="flex text-yellow-400">
+                                    {{ str_repeat('⭐', $paket->getRating()) }}
+                                </div>
+                                <span class="text-gray-600 ml-2">{{ $paket->getRating() / 5 }}</span>
+                            </div>
+                            <span class="text-lg font-semibold">{{ $paket->getNama() }}</span>
+                            <span
+                                class="text-sm font-light">{{ Str::limit($paket->getDeskripsi(), 70) }}</span>
+                            <span class="text-lg">Rp. {{ number_format($paket->getHarga()) }}</span>
                         </div>
                     </div>
                 </a>
-                <a href="/detail" class="">
-                    <div class="  shadow-lg w-full h-90 bg-cover bg-center rounded flex flex-col justify-end "
-                        style="background-image: url('{{ URL::asset('images/banner-2.jpg') }}');">
-                        <div class="h-36 rounded-t-xl rounded-b bg-white p-3 flex flex-col">
-                            <span>⭐⭐⭐⭐</span>
-                            <span class="text-lg font-semibold">Lorem, ipsum dolor.</span>
-                            <span class="text-sm font-light">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                elit. Placeat, exercitationem.</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="/detail" class="">
-                    <div class="  shadow-lg w-full h-90 bg-cover bg-center rounded flex flex-col justify-end "
-                        style="background-image: url('{{ URL::asset('images/banner-1.jpg') }}');">
-                        <div class="h-36 rounded-t-xl rounded-b bg-white p-3 flex flex-col">
-                            <span>⭐⭐⭐⭐</span>
-                            <span class="text-lg font-semibold">Lorem, ipsum dolor.</span>
-                            <span class="text-sm font-light">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                elit. Placeat, exercitationem.</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="/detail" class="">
-                    <div class="  shadow-lg w-full h-90 bg-cover bg-center rounded flex flex-col justify-end "
-                        style="background-image: url('{{ URL::asset('images/banner-2.jpg') }}');">
-                        <div class="h-36 rounded-t-xl rounded-b bg-white p-3 flex flex-col">
-                            <span>⭐⭐⭐⭐</span>
-                            <span class="text-lg font-semibold">Lorem, ipsum dolor.</span>
-                            <span class="text-sm font-light">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                elit. Placeat, exercitationem.</span>
-                        </div>
-                    </div>
-                </a>
-                {{-- @forelse ($datas as $data)
-                        <x-card id="{{$data['222118_id_menu']}}" nama="{{$data['222118_nama']}}" harga="{{$data['222118_harga']}}" image="{{$data['222118_foto']}}"></x-card>
+            @empty
+                <h3>Tak ada data</h3>
+            @endforelse
 
-                    @empty
-                        <h1>Tak ada data</h1>
-                    @endforelse --}}
 
             </div>
         </div>

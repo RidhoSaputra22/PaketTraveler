@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Departement;
+use App\Models\Kategori;
+use App\Models\PaketTravel;
 use App\Models\Project;
 use App\Models\User;
 use Carbon\Carbon;
@@ -12,170 +14,53 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $datas = User::with('departement')->whereNot('role', 'admin')->get();
-
-        return view('admin.anggota.index', compact('datas', 'request'));
+        $users = User::all();
+        return view('admin.user.index', compact('users'));
     }
-    public function print(Request $request)
-    {
-        $datas = Project::all();
 
-        $start = null;
-        $end = null;
+    public function homepage(Request $request){
+        $pakets = PaketTravel::all();
+        $lokasis = $pakets->where('lokasi_212396')->groupBy('lokasi_212396');
+        $durasis = $pakets->where('durasi_212396')->groupBy('durasi_212396');
+        $kategoris = Kategori::all();
 
-        if ($request->has('hari') && $request->has('bulan') && $request->has('tahun') && $request->has('pilihan')) {
-            $start = $request->hari != 0 ? Carbon::create($request->tahun, $request->bulan, $request->hari)->startOfDay() : Carbon::create($request->tahun, $request->bulan, 1)->startOfDay();
-
-            switch($request->pilihan){
-                case 1:
-                $end = $start->copy()->endOfDay();
-                $datas = Project::whereBetween('created_at', [$start->format('Y-m-d H:i:s'), $end->format('Y-m-d H:i:s')]);
-                break;
-                case 2:
-                $end = $start->copy()->addDay(7)->endOfDay();
-                $datas = Project::whereBetween('created_at', [$start->format('Y-m-d H:i:s'), $end->format('Y-m-d H:i:s')]);
-                break;
-                case 3:
-                $start = Carbon::create($request->tahun, $request->bulan, 1)->startOfDay();
-                $end = $start->copy()->endOfMonth()->endOfDay();
-                $datas = Project::whereBetween('created_at', [$start->format('Y-m-d H:i:s'), $end->format('Y-m-d H:i:s')]);
-                break;
-            }
+        if($request->filled('lokasi')){
+            $pakets = $pakets->where('lokasi_212396', $request->lokasi);
         }
 
+        if($request->filled('kategori')){
+            $pakets = $pakets->where('id_kategori_212396', $request->kategori);
+        }
 
+        if($request->filled('durasi')){
+            $pakets = $pakets->where('durasi_212396', $request->durasi);
+        }
 
-        // $datas = $datas->get();
-
-
-
-        return view('admin.print', compact('datas', 'request'));
+        return view('home', compact('pakets', 'lokasis', 'request', 'durasis', 'kategoris'));
     }
 
-    public function dashboard(Request $request)
-    {
-        // $datas = User::with('departement')->whereNot('role', 'admin')->get();
+    public function detail(PaketTravel $paketTravel){
+        $paket = $paketTravel;
+        $pakets = PaketTravel::all();
 
-        // $laporan = [
-        //     'pegawai' => User::where('role', 'pegawai')
-        //                       ->count(),
-        //     'manajer' => User::where('role', 'manajer')
-        //                       ->count(),
-        //     'today' => $datas->whereBetween('created_at', [now()->startOfDay()->format('Y-m-d H:i:s'), now()->endOfDay()->format('Y-m-d H:i:s')])->count(),
-        //     'selesai' => $datas->where('status', 'submited')->count(),
-        //     'semua' => $datas->count(),
-        // ];
-
-
-        // return view('admin.dashboard', compact('datas', 'laporan', 'request'));
-        return view('admin.dashboard');
+        return view('detail', compact('paket', 'pakets'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        $departement = Departement::all();
-        return view('admin.anggota.create', compact('departement'));
-    }
+    public function paket(Request $request){
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
+        $pakets = PaketTravel::all();
+        $kategori = Kategori::all();
 
+        if($request->filled('search')){
+            $pakets = $pakets->where('nama_212396', 'like', '%'.$request->search.'%');
+        }
 
-        $request->validate([
-            "nama" => 'required',
-            "alamat" => 'required',
-            "hp" => 'required',
-            "email" => 'required',
-            "password" => 'required',
-            "departement" => 'required',
-            "role" => 'required|in:pegawai,manajer',
-        ]);
+        if($request->filled('kategori')){
+            $pakets = $pakets->where('id_kategori_212396', $request->kategori);
+        }
 
-        // dd($request->all());
-
-        User::create([
-            "nama" => $request->nama,
-            "alamat" => $request->alamat,
-            "hp" => $request->hp,
-            "email" => $request->email,
-            "role" => $request->role,
-            "password" => Hash::make($request->password),
-            "id_departement" => $request->departement,
-        ]);
-
-        return redirect()->route('anggota.index');
-
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show($id)
-    {
-        $departement = Departement::all();
-        $pegawai = User::findOrFail($id);
-
-        return view('admin.anggota.show', compact('pegawai', 'departement'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(User $pegawai)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request,  $id)
-    {
-
-
-        $request->validate([
-            "nama" => 'required',
-            "alamat" => 'required',
-            "hp" => 'required',
-            "email" => 'required',
-            "departement" => 'required',
-            "role" => 'required|in:pegawai,manajer',
-        ]);
-
-
-
-
-        User::findOrFail($id)->update([
-            "nama" => $request->nama,
-            "alamat" => $request->alamat,
-            "hp" => $request->hp,
-            "email" => $request->email,
-            "role" => $request->role,
-            "id_departement" => $request->departement,
-        ]);
-        // dd($request->all(), $pegawai);
-
-
-
-        return redirect()->route('anggota.index');
-
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(User $pegawai)
-    {
-        $pegawai->delete();
-        return redirect()->route('pegawai.index');
-
+        return view('paket', compact('request', 'pakets', 'kategori'));
     }
 }

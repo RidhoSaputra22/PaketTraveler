@@ -21,11 +21,13 @@ class PaketTravelFactory extends Factory
             'id_kategori_212396' => Kategori::factory()->create(),
             'nama_212396' => fake()->city(),
             'deskripsi_212396' => fake()->text(),
-            'thumbnail_212396' => fake()->imageUrl(),
+            'thumbnail_212396' => fake()->randomElement(['PakteTravel/01JRQM7KJBRG24801R27FGZS0R.jpg', 'PakteTravel/01JRQM53SNYXETPKR97CJDYCJ5.jpg', 'PakteTravel/01JRQM74KE6RGJ1CFRMTV4E26V.jpg']),
             'harga_212396' => fake()->numberBetween(100000, 1000000),
             'tanggal_berangkat_212396' => fake()->dateTime(),
             'tanggal_pulang_212396' => fake()->dateTime(),
             'lokasi_212396' => fake()->city(),
+            'rating_212396' => fake()->numberBetween(1, 5),
+            'durasi_212396' => fake()->numberBetween(1, 5),
         ];
     }
 }

@@ -8,6 +8,7 @@ use App\Filament\Resources\PaketTravelResource\RelationManagers\FasilitasRelatio
 use App\Filament\Resources\PaketTravelResource\RelationManagers\GalleriRelationManager;
 use App\Models\Galleri;
 use App\Models\PaketTravel;
+use Carbon\Carbon;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -37,37 +38,77 @@ class PaketTravelResource extends Resource
                     ->required()
                     ->image()
                     ->columnSpanFull()
-                    ->deletable(true),
+                    ->deletable(true)
+                    ->imageEditor()
+                    ->live(),
                 Forms\Components\TextInput::make('nama_212396')
                     ->label("Nama Paket")
                     ->required()
-                    ->maxLength(255)
-                    ->columnSpanFull(),
-                Forms\Components\Textarea::make('deskripsi_212396')
-                    ->label("Deskripsi")
-                    ->required()
-                    ->columnSpanFull(),
-                Forms\Components\TextInput::make('harga_212396')
-                    ->label("Harga")
-                    ->prefix('Rp. ')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\DateTimePicker::make('tanggal_berangkat_212396')
-                    ->label('Tanggal Berangkat')
-                    ->required(),
-                Forms\Components\DateTimePicker::make('tanggal_pulang_212396')
-                    ->label('Tanggal Pulang')
-                    ->required(),
+                    ->maxLength(255),
                 Forms\Components\TextInput::make('lokasi_212396')
                     ->label('Lokasi')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\Textarea::make('deskripsi_212396')
+                    ->label("Deskripsi")
+                    ->required()
+                    ->columnSpanFull(),
+                Forms\Components\DatePicker::make('tanggal_berangkat_212396')
+                    ->label('Tanggal Berangkat')
+                    ->required()
+                    ->minDate(now()->format('Y-m-d'))
+                    ->afterStateUpdated(function (string $state, Forms\Set $set, Forms\Get $get) {
+                        $tanggal = Carbon::parse($state);
+                        $durasi = $get('durasi_212396') - 1;
+                        $set('tanggal_pulang_212396', $tanggal->addDays($durasi)->format('Y-m-d'));
+
+                    })
+                    ->live(),
+                Forms\Components\DatePicker::make('tanggal_pulang_212396')
+                    ->label('Tanggal Pulang')
+                    ->required()
+                    ->minDate(now()->format('Y-m-d'))
+                    ->afterStateUpdated(function (string $state, Forms\Set $set, Forms\Get $get) {
+                        $durasi = Carbon::parse($state)->subDays(Carbon::parse($get('tanggal_berangkat_212396'))->day)->day + 1;
+                        $set('durasi_212396', $durasi);
+                    })
+                    ->live(),
+
+                Forms\Components\TextInput::make('durasi_212396')
+                    ->label('Durasi Keberangkatan')
+                    ->numeric()
+                    ->suffix("Hari")
+                    ->required()
+                    ->maxLength(255)
+                    ->afterStateUpdated(function (int $state, Forms\Set $set, Forms\Get $get) {
+                        $tanggal = Carbon::parse($get('tanggal_berangkat_212396'));
+                        $durasi = $state;
+                        $set('tanggal_pulang_212396', $tanggal->addDays($durasi)->format('Y-m-d'));
+                        // dump($durasi);
+                    })
+                    ->live(),
+                Forms\Components\TextInput::make('harga_212396')
+                    ->label("Harga")
+                    ->prefix('Rp. ')
+                    ->suffix(' / orang')
+                    ->required()
+                    ->numeric(),
+                Forms\Components\Select::make('rating_212396')
+                    ->label('Rating')
+                    ->options([
+                        1 => '⭐',
+                        2 => '⭐⭐',
+                        3 => '⭐⭐⭐',
+                        4 => '⭐⭐⭐⭐',
+                        5 => '⭐⭐⭐⭐⭐',
+                    ])
+                    ->selectablePlaceholder()
+                    ->required(),
                 Forms\Components\Select::make('kategori')
                     ->label('Kategori')
                     ->required()
                     ->relationship('kategori', 'kategori_212396')
-                    ->searchable()
-                    ->columnSpanFull(),
+                    ->searchable(),
             ]);
     }
 
@@ -97,6 +138,17 @@ class PaketTravelResource extends Resource
                     ->label('Lokasi')
                     ->searchable()
                     ->searchable(),
+                Tables\Columns\SelectColumn::make('rating_212396')
+                    ->label('Rating')
+                    ->options([
+                        1 => '⭐',
+                        2 => '⭐⭐',
+                        3 => '⭐⭐⭐',
+                        4 => '⭐⭐⭐⭐',
+                        5 => '⭐⭐⭐⭐⭐',
+                    ])
+                    ->selectablePlaceholder(false)
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('kategori.kategori_212396')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('tanggal_berangkat_212396')
@@ -122,8 +174,8 @@ class PaketTravelResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
                 Tables\Actions\ViewAction::make('view')->label('View')->icon('heroicon-s-eye'),
+                Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make()
                     ->after(function (PaketTravel $record) {
                         // delete single

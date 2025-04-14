@@ -22,8 +22,52 @@ class PaketTravel extends Model
         'harga_212396',
         'tanggal_berangkat_212396',
         'tanggal_pulang_212396',
-        'lokasi_212396'
+        'lokasi_212396',
+        'rating_212396',
+        'durasi_212396'
     ];
+
+    public function getId(){
+        return $this->id_paket_212396;
+    }
+
+    public function getDurasi(){
+        return $this->durasi_212396;
+    }
+
+    public function getNama(){
+        return $this->nama_212396;
+    }
+
+    public function getHarga(){
+        return $this->harga_212396;
+    }
+
+    public function getThumbnail(){
+        return $this->thumbnail_212396;
+    }
+
+    public function getLokasi(){
+        return $this->lokasi_212396;
+    }
+
+    public function getTanggalBerangkat(){
+        return $this->tanggal_berangkat_212396;
+    }
+
+    public function getTanggalPulang(){
+        return $this->tanggal_pulang_212396;
+    }
+
+    public function getDeskripsi(){
+        return $this->deskripsi_212396;
+    }
+
+    public function getRating(){
+        return $this->rating_212396;
+    }
+
+
 
     public function kategori()
     {
