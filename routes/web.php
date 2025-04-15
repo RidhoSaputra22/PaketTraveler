@@ -14,6 +14,6 @@ Route::get('/paket', [UserController::class, 'paket']);
 
 Route::get('/login', [CustomAuthController::class, 'login'])->name('login');
 Route::get('/regist', [CustomAuthController::class, 'regist']);
-Route::post('/login', [CustomAuthController::class, 'customLogin'])->name('user.login');
-Route::post('/regist', [CustomAuthController::class, 'customLogin'])->name('user.regist');
+Route::post('/login-user', [CustomAuthController::class, 'customLogin'])->name('user.login');
+Route::post('/regist-user', [CustomAuthController::class, 'customRegistration'])->name('user.regist');
 Route::get('/logout', [CustomAuthController::class, 'logout']);

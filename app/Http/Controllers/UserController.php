@@ -54,12 +54,15 @@ class UserController extends Controller
         $kategori = Kategori::all();
 
         if($request->filled('search')){
-            $pakets = $pakets->where('nama_212396', 'like', '%'.$request->search.'%');
+            $pakets = PaketTravel::where('nama_212396', 'like', '%'.$request->search.'%')->get();
+
         }
 
         if($request->filled('kategori')){
             $pakets = $pakets->where('id_kategori_212396', $request->kategori);
         }
+
+        // dd($pakets);
 
         return view('paket', compact('request', 'pakets', 'kategori'));
     }

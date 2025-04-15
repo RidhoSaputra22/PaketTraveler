@@ -25,8 +25,15 @@ class DatabaseSeeder extends Seeder
             'password' => "admin",
             'remember_token' => null,
         ]);
+        User::create([
+            'nama_212396' => "user",
+            'email_212396' => "user@gmail.com",
+            'password_212396' => Hash::make("user"),
+            'alamat_212396' => fake()->address(),
+            'hp_212396' => fake()->phoneNumber(),
+        ]);
         User::factory(3)->create();
-        Transaksi::factory(3)->create();
+        Transaksi::factory(2)->create();
         // PaketTravel::factory(10)->create();
         // Galleri::factory(10)->create();
         // FasilitasPaket::factory(10)->create();

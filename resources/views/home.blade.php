@@ -71,7 +71,7 @@
                         <select name="kategori" id="" class="w-full rounded p-1"  >
                             <option value="">Semua Kategori</option>
                             @forelse ($kategoris as $kategori)
-                                <option value="{{ $kategori['kategori_212396'] }}" {{ $request->kategori == $kategori['kategori_212396'] ? 'selected' : '' }}>{{ $kategori['kategori_212396'] }} Hari</option>
+                                <option value="{{ $kategori['id_kategori_212396'] }}" {{ $request->kategori == $kategori['id_kategori_212396'] ? 'selected' : '' }}>{{ $kategori['kategori_212396'] }}</option>
                             @empty
                             @endforelse
                         </select>

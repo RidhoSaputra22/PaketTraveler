@@ -71,27 +71,30 @@
             </div>
         </div>
     </section>
-    <section class="pt-32 pb-24 container mx-auto px-4 w-full font-semibold space-y-4">
+    <section class="py-32 pb-24 container mx-auto px-4 w-full font-semibold space-y-4">
         <div class="text-3xl font-semibold text-gray-800 mb-4">Dokumentasi Kegiatan</div>
-        <div class="flex flex-col md:flex-row gap-5 mx-6">
-        @forelse ($paket->galleri as $galleri)
-                <div class="h-[250px] aspect-3/2 bg-no-repeat bg-cover bg-center"
+        <div class="flex flex-col md:flex-row gap-5 mx-6 overflow-x-scroll">
+            @forelse ($paket->galleri as $galleri)
+            <a href="{{ Storage::url($galleri['path_212396'])}}" class="">
+                <div class="shadow-lg md:w-100 h-90  bg-bottom bg-cover bg-no-repeat  rounded flex flex-col justify-end "
                     style="background-image: url('{{ Storage::url($galleri['path_212396']) }}');">
+
                 </div>
-                @empty
+            </a>
+            @empty
                 <h3>Tak ada data</h3>
-                @endforelse
+            @endforelse
         </div>
 
     </section>
 
-    <section class="pt-32 pb-24 container mx-auto px-4 w-full font-semibold space-y-4">
+    <section class="py-32 container mx-auto px-4 w-full font-semibold space-y-4">
         <div class="text-3xl font-semibold text-gray-800 mb-4">Paket Lainnya</div>
-        <div class="flex flex-col md:flex-row gap-5 mx-6">
+        <div class="flex flex-col md:flex-row gap-5 mx-6 overflow-x-auto ">
 
         @forelse ($pakets as $paket)
             <a href="/detail/{{ $paket->getId() }}" class="">
-                <div class="  shadow-lg w-full h-90 bg-bottom bg-cover bg-no-repeat  rounded flex flex-col justify-end "
+                <div class="  shadow-lg h-90 md:w-100 bg-bottom bg-cover bg-no-repeat  rounded flex flex-col justify-end "
                     style="background-image: url('{{ Storage::url($paket->getThumbnail()) }}');">
                     <div class="h-40 rounded-t-xl rounded-b bg-white p-3 flex flex-col">
                         <div class="flex items-center">

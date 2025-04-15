@@ -33,8 +33,9 @@ class GalleriRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('path_212396')
             ->columns([
-                Tables\Columns\TextColumn::make('path_212396')
+                Tables\Columns\ImageColumn::make('path_212396')
                 ->label("Gambar"),
+
             ])
             ->filters([
                 //
