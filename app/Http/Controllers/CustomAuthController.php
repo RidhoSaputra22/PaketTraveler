@@ -71,6 +71,42 @@ class CustomAuthController extends Controller
       ]);
     }
 
+    public function updateUser(Request $request){
+        $request->validate([
+            'nama' => 'required',
+            'email' => 'required',
+            'hp' => 'required',
+            'password' => 'nullable',
+            'foto' => 'nullable'
+        ]);
+
+        $user = Auth::user();
+
+        if($request->hasFile('foto')){
+            $file = $request->file('foto');
+            $filename = time().'.'.$file->getClientOriginalExtension();
+            $file->move(public_path('storage/User/'), $filename);
+            $user->update([
+                'foto_212396' => 'User/'.$filename,
+            ]);
+        }
+
+        if($request->password != null){
+            $user->update([
+            'password_212396' => Hash::make($request->password),
+            ]);
+        }
+
+        $user->update([
+            'nama_212396' => $request->nama,
+            'email_212396' => $request->email,
+            'hp_212396' => $request->hp,
+        ]);
+
+
+        return redirect()->back();
+    }
+
     public function logout(){
         Session::flush();
         Auth::logout();

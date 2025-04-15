@@ -42,6 +42,10 @@
                                     <input type="text" name="password" class=" w-full mt-1 rounded-sm">
                                 </div>
                                 <div>
+                                    <p>Foto</p>
+                                    <input type="file" name="foto" class=" w-full mt-1 rounded-sm">
+                                </div>
+                                <div>
                                     <button type="submit" class="px-3 py-1 bg-green-400 rounded-sm">Submit</button>
                                 </div>
                             </form>

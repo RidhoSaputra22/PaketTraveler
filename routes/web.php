@@ -10,6 +10,7 @@ Route::get('/paket', [UserController::class, 'paket']);
 
 
 Route::middleware(['auth'])->get('/profile', [UserController::class, 'profile']);
+Route::middleware(['auth'])->post('/updateUser', [CustomAuthController::class, 'updateUser']);
 
 
 
