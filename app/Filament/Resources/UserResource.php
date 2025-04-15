@@ -9,12 +9,12 @@ use Filament\Actions\Action;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Facades\Filament;
 use Filament\Forms;
-use Filament\Forms\Components\Select;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\SelectColumn;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -33,6 +33,13 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
+                FileUpload::make('foto_212396')
+                    ->label("Foto")
+                    ->image()
+                    ->imageEditor()
+                    ->required()
+                    ->columnSpanFull()
+                    ->directory('User'),
                 TextInput::make('nama_212396')
                     ->label("Nama")
                     ->required()
@@ -62,6 +69,11 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
+                ImageColumn::make('foto_212396')
+                    ->label("Foto")
+                    ->width(50)
+                    ->height(50),
+
                 TextColumn::make('nama_212396')
                     ->label("Nama")
                     ->searchable(),

@@ -22,6 +22,7 @@ class User extends Authenticatable
         'password_212396',
         'alamat_212396',
         'hp_212396',
+        'foto_212396',
     ];
 
     protected $hidden = [
@@ -29,6 +30,9 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function transaksi(){
+        return $this->hasMany(Transaksi::class, 'id_user_212396', 'id_user_212396');
+    }
 
 
 }

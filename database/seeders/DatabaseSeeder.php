@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             'password_212396' => Hash::make("user"),
             'alamat_212396' => fake()->address(),
             'hp_212396' => fake()->phoneNumber(),
+            'foto_212396' => 'profile.png'
         ]);
         User::factory(3)->create();
         Transaksi::factory(2)->create();

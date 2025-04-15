@@ -9,6 +9,9 @@ Route::get('/detail/{paketTravel}', [UserController::class, 'detail']);
 Route::get('/paket', [UserController::class, 'paket']);
 
 
+Route::middleware(['auth'])->get('/profile', [UserController::class, 'profile']);
+
+
 
 
 

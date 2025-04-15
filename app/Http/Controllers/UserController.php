@@ -6,6 +6,7 @@ use App\Models\Departement;
 use App\Models\Kategori;
 use App\Models\PaketTravel;
 use App\Models\Project;
+use App\Models\Transaksi;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -65,5 +66,12 @@ class UserController extends Controller
         // dd($pakets);
 
         return view('paket', compact('request', 'pakets', 'kategori'));
+    }
+
+    public function profile(){
+        $user = Auth::user();
+
+
+        return view('profile', compact('user'));
     }
 }

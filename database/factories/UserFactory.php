@@ -28,6 +28,7 @@ class UserFactory extends Factory
             'alamat_212396' => fake()->address(),
             'password_212396' => Hash::make('user'),
             'hp_212396' => fake()->phoneNumber(),
+            'foto_212396' => 'profile.png'
         ];
     }
 }
