@@ -9,8 +9,11 @@ Route::get('/detail/{paketTravel}', [UserController::class, 'detail']);
 Route::get('/paket', [UserController::class, 'paket']);
 
 
-Route::middleware(['auth'])->get('/profile', [UserController::class, 'profile']);
-Route::middleware(['auth'])->post('/updateUser', [CustomAuthController::class, 'updateUser']);
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [UserController::class, 'profile']);
+    Route::post('/updateUser', [CustomAuthController::class, 'updateUser']);
+    Route::post('/payment', [UserController::class, 'payment']);
+});
 
 
 

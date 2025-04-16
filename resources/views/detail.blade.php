@@ -35,11 +35,11 @@
 
                     <div class="flex gap-4 mb-8">
                         <a href="/paket"
-                            class=" text-center flex-1 bg-blue-900 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300">
+                            class=" text-center flex-1 bg-blue-900 text-white py-3 px-6 rounded-sm hover:bg-blue-700 transition duration-300">
                             Lihat Paket Lainnya
                         </a>
                         <x-modal-button id-modal="filter-modal"
-                            class="text-center flex-1 border-2 border-blue-900 text-blue-900 py-3 px-6 rounded-lg hover:bg-blue-50 transition duration-300">
+                            class="text-center flex-1 border-2 border-blue-900 text-blue-900 py-3 px-6 rounded-sm hover:bg-blue-50 transition duration-300">
                             Beli Sekarang
                         </x-modal-button>
                     </div>
@@ -119,7 +119,8 @@
 
 
     <x-modal id-modal="filter-modal">
-        <form>
+        <form action="/payment" method="POST">
+            @csrf
             <x-modal-header id-modal="filter-modal">
                 <h3 class=" text-xl text-gray-900 dark:text-white">
                     Isi Formulir Berikut
@@ -127,21 +128,23 @@
             </x-modal-header>
             <x-modal-body>
                 <div class="w-[1000px] min-h-[200px] ">
-                    <form action="">
+                    <div >
+                        <input type="text" name="paket" id="id_paket" value="{{ $paket->getId() }}" hidden>
+                        <input type="text" name="qty" id="qty_input" value="1"  hidden>
                         <div class="flex flex-col gap-2">
                             <div class="flex flex-col gap-2">
                                 <label for="name" class="text-gray-900 dark:text-white">Nama Lengkap</label>
-                                <input type="text" name="name" id="name"
+                                <input type="text" name="name" id="name" value="{{ Auth::user()['nama_212396'] }}"
                                     class="p-2 border border-gray-300 rounded-sm">
                             </div>
                             <div class="flex flex-col gap-2">
                                 <label for="name" class="text-gray-900 dark:text-white">Email</label>
-                                <input type="text" name="name" id="name"
+                                <input type="text" name="email" id="name" value="{{ Auth::user()['email_212396'] }}"
                                     class="p-2 border border-gray-300 rounded-sm">
                             </div>
                             <div class="flex-1 flex flex-col gap-2">
                                 <label for="name" class="text-gray-900 dark:text-white">Nomor Telepon</label>
-                                <input type="text" name="name" id="name"
+                                <input type="text" name="hp" id="name" value="{{ Auth::user()['hp_212396'] }}"
                                     class="p-2 border border-gray-300 rounded-sm">
                             </div>
                             <div class="flex gap-5">
@@ -149,11 +152,11 @@
                                     <label for="name" class="text-gray-900 dark:text-white">Jumlah Orang</label>
                                     <div class="flex font-bold">
                                         <button type="button"
-                                            class="py-2 px-4 bg-green-500 border border-gray-300 rounded-l-sm"
+                                            class="py-2 px-4 bg-blue-900 text-white border border-gray-300 rounded-l-sm"
                                             id="add">+</button>
                                         <span class="py-2 px-8 border border-gray-300 " id="qty">1</span>
                                         <button type="button"
-                                            class="py-2 px-4 bg-red-500 border border-gray-300 rounded-r-sm"
+                                            class="py-2 px-4 bg-blue-900 text-white border border-gray-300 rounded-r-sm"
                                             id="remove">-</button>
                                     </div>
                                 </div>
@@ -165,12 +168,12 @@
                             </div>
                         </div>
 
-                    </form>
+                    </div>
                 </div>
             </x-modal-body>
             <x-modal-footer>
                 <div class="flex gap-3 ">
-                    <button class="px-4 py-2 border bg-blue-900 text-white rounded-lg">Konfirmasi Pembelian</button>
+                    <button class="px-4 py-2 border bg-blue-900 text-white rounded-sm">Konfirmasi Pembelian</button>
                 </div>
             </x-modal-footer>
         </form>
@@ -180,10 +183,12 @@
         let add = document.getElementById('add')
         let remove = document.getElementById('remove')
         let qty = document.getElementById('qty')
+        let qty_input = document.getElementById('qty_input')
         let total = document.getElementById('total')
 
         add.addEventListener('click', () => {
             qty.innerHTML = parseInt(qty.innerHTML) + 1
+            qty_input.value = parseInt(qty_input.value) + 1
             total.innerHTML =
                 `Rp. ${(parseInt(qty.innerHTML) * {{ $paket['harga_212396'] }}).toLocaleString('id-ID')}`
         })
@@ -192,12 +197,13 @@
             if (parseInt(qty.innerHTML) == 1) return
 
             qty.innerHTML = parseInt(qty.innerHTML) - 1
+            qty_input.value = parseInt(qty_input.value) - 1
             total.innerHTML =
                 `Rp. ${(parseInt(qty.innerHTML) * {{ $paket['harga_212396'] }}).toLocaleString('id-ID')}`
         })
     </script>
 
-    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-Sh3wGKHVSP3NM6lF"></script>
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="Mid-client-U8IuIarlC9Bs09mS"></script>
     @if (session('token'))
         <script type="text/javascript">
             // SnapToken acquired from previous step
@@ -205,8 +211,7 @@
                 // Optional
                 onSuccess: function(result) {
                     /* You may add your own js here, this is just example */
-
-                    window.location.href = "/checkout/{{ session('token')['id_jadwal'] }}"
+                    window.location.href = "/profile#riwayat"
 
                 },
                 // Optional
