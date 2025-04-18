@@ -1,44 +1,43 @@
 <x-app>
     <x-navbar></x-navbar>
-    <section class="min-h-[110vh] rounded-b-3xl  bg-no-repeat bg-cover"
+    <section class="min-h-[110vh] w-full rounded-b-3xl  bg-no-repeat bg-cover  sm:text-left"
         style="background-image: url('{{ URL::asset('images/banner-1.jpg') }}');">
 
         <div class="absolute h-[110vh] rounded-b-3xl w-full bg-black opacity-[60%]">
 
         </div>
-        <div class="flex absolute">
-            <div class=" h-full flex flex-col py-50 pl-14  text-white z-10 gap-5 w-full">
-                <div class="text-8xl tracking-[3px] font-semibold font-serif">Jelajahi Keindahan Dunia!</div>
-
+        <div class=" flex flex-col lg:flex-row absolute w-full ">
+            <div class=" h-full flex flex-col pt-50 lg:py-50 px-14  text-white z-10 gap-5 w-full">
+                <div class="xs:text-7xl sm:text-8xl  tracking-[3px] font-semibold font-serif">Jelajahi Keindahan Dunia!</div>
                 <div class="text-lg italic pt-3">Pesona Travel adalah solusi perjalanan pintar untuk kamu yang ingin
                     jalan-jalan tanpa ribet. Kami menyediakan paket traveler lengkap – dari tiket, penginapan, hingga
                     itinerary personal yang bisa disesuaikan. Nikmati liburan impianmu dengan harga hemat dan layanan
                     terbaik!</div>
 
             </div>
-            <div class="py-32 px-5 w-[80%] flex gap-5">
-                <div>
-                    <div class="shadow-lg h-[520px] w-[320px] rounded bg-white bg-cover bg-center "
+            <div class=" xs:pt-5 lg:pt-32 w-auto flex xs:flex-col md:flex-row gap-5 px-14">
+                <div class="w-full">
+                    <div class="shadow-lg xs:h-[200px] xs:w-full md:h-[520px] md:w-[320px] rounded bg-white bg-cover bg-center "
                         style="background-image: url('{{ URL::asset('images/banner-2.jpg') }}');">
                         <div class="rounded h-full w-full bg-black opacity-[20%]"></div>
 
                     </div>
                 </div>
                 <div class="flex-col space-y-5">
-                    <div class="shadow-lg h-[220px] w-[320px] bg-cover bg-center rounded bg-white"
+                    <div class="shadow-lg xs:h-[200px] xs:w-full md:h-[220px] md:w-[320px] bg-cover bg-center rounded bg-white"
                         style="background-image: url('{{ URL::asset('images/banner-3.jpg') }}');">
                     </div>
-                    <div class="shadow-lg h-[320px] w-[320px] bg-cover bg-center rounded bg-white"
+                    <div class="shadow-lg xs:h-[200px] xs:w-full md:h-[320px] md:w-[320px] bg-cover bg-center rounded bg-white"
                         style="background-image: url('{{ URL::asset('images/banner-4.jpg') }}');">
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <section class="min-h-36 px-32 pt-9" id="cari">
+    <section class="min-h-36 lg:px-32 pt-9 " id="cari">
         <form action="#cari" method="get">
-            <div class="flex h-36 border shadow-lg px-14">
-                <div class="bg-white h-full flex-1 flex items-center px-5 gap-5  ">
+            <div class="flex xs:flex-col lg:flex-row h-auto lg:border lg:shadow-lg px-14">
+                <div class="bg-white h-full flex-1 flex items-center p-5 gap-5  ">
                     <div class="w-full">
                         <div>Pilih Destinasi</div>
                         <select name="lokasi" id="" class="w-full rounded p-1"  >
@@ -51,7 +50,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="bg-white h-full flex-1 flex items-center px-5 gap-5 border-white-900 border-r-2">
+                <div class="bg-white h-full flex-1 flex items-center p-5 gap-5 border-white-900 border-r-2">
 
                     <div class="w-full">
                         <div>Pilih Durasi Keberangkatan</div>
@@ -64,7 +63,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="bg-white h-full flex-1 flex items-center px-5 gap-5 border-white-900 border-r-2">
+                <div class="bg-white h-full flex-1 flex items-center p-5 gap-5 border-white-900 border-r-2">
 
                     <div class="w-full">
                         <div>Pilih Kategori Paket</div>
@@ -77,7 +76,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="bg-white h-full flex-1 flex items-center px-5 pt-3  border-r-2">
+                <div class="bg-white h-full flex-1 flex justify-center w-full items-center p-5 pt-5  border-r-2">
                     <button type="submit" class="w-full bg-blue-900 text-white px-5 py-2">Cari Destinasi</button>
 
                 </div>
@@ -86,17 +85,17 @@
 
         </form>
     </section>
-    <section class="min-h-screen px-36 py-10">
+    <section class="min-h-screen xs:px-4 lg:px-36 py-10 ">
         <div class="w-full h-full p-10">
             <div class="w-full h-auto flex pb-5 ">
-                <div class="text-xl flex-1">Destinasi Populer</div>
-                <form action="/paket" method="get" class="w-1/4 flex gap-3">
+                <div class="text-xl xs:w-full lg:flex-1">Destinasi Populer</div>
+                <form action="/paket" method="get" class="xs:w-full lg:w-1/4 flex gap-3">
                     <input type="text" name="search" class="p-1 rounded-sm border border-black  w-full " required>
                     <button class="px-5 py-1 rounded-sm bg-blue-900 text-white">Cari</button>
                 </form>
             </div>
             <div>
-                <div class="grid grid-cols-4 gap-3">
+                <div class="grid xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
                     @forelse ($pakets as $paket)
                         <a href="/detail/{{ $paket->getId() }}" class="">
                             <div class="  shadow-lg w-full h-90 bg-bottom bg-cover bg-no-repeat  rounded flex flex-col justify-end "
@@ -126,7 +125,7 @@
 
         </div>
     </section>
-    <x-footter></x-footter>
+    {{-- <x-footter></x-footter> --}}
 
 
 
