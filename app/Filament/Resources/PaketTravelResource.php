@@ -111,6 +111,10 @@ class PaketTravelResource extends Resource
                     ->required()
                     ->relationship('kategori', 'kategori_212396')
                     ->searchable(),
+                Forms\Components\TextInput::make('kuota_212396')
+                    ->label('Kuota (orang)')
+                    ->required()
+                    ->numeric(),
             ]);
     }
 
@@ -153,6 +157,14 @@ class PaketTravelResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('kategori.kategori_212396')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('kuota_212396')
+                    ->searchable()
+                    ->numeric()
+                    ->sortable()
+                    ->suffix(" Orang")
+
+                    ->label('Kuota'),
+
                 Tables\Columns\TextColumn::make('tanggal_berangkat_212396')
                     ->label('Tanggal Berangkat')
                     ->dateTime()

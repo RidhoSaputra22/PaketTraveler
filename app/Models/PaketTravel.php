@@ -24,7 +24,8 @@ class PaketTravel extends Model
         'tanggal_pulang_212396',
         'lokasi_212396',
         'rating_212396',
-        'durasi_212396'
+        'durasi_212396',
+        'kuota_212396'
     ];
 
     public function getId(){

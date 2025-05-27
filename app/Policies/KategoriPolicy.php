@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Kategori;
-use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Auth\Access\Response;
 
 class KategoriPolicy
@@ -11,56 +11,56 @@ class KategoriPolicy
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user): bool
+    public function viewAny(Admin $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Kategori $kategori): bool
+    public function view(Admin $user, Kategori $kategori): bool
     {
-        return false;
+        return true;
     }
 
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): bool
+    public function create(Admin $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Kategori $kategori): bool
+    public function update(Admin $user, Kategori $kategori): bool
     {
-        return false;
+        return true;
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Kategori $kategori): bool
+    public function delete(Admin $user, Kategori $kategori): bool
     {
-        return false;
+        return true;
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Kategori $kategori): bool
+    public function restore(Admin $user, Kategori $kategori): bool
     {
-        return false;
+        return true;
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Kategori $kategori): bool
+    public function forceDelete(Admin $user, Kategori $kategori): bool
     {
-        return false;
+        return true;
     }
 }

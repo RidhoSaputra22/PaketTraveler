@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('lokasi_212396');
             $table->integer('durasi_212396');
             $table->integer('rating_212396');
+            $table->integer('kuota_212396');
             $table->timestamps();
         });
     }

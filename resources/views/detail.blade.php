@@ -59,6 +59,11 @@
                                 <span class="text-gray-600">Lokasi</span>
                                 <span class="text-gray-800">{{ $paket['lokasi_212396'] }}</span>
                             </p>
+                            <p class="flex justify-between text-sm">
+                                <span class="text-gray-600">Sisa Kuota</span>
+                                <input type="text" name="" id="quota" value="{{ $paket['kuota_212396'] }}" hidden>
+                                <span class="text-gray-800">{{ $paket['kuota_212396'] }} Orang</span>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -151,6 +156,9 @@
                                     <input type="text" name="paket" id="id_paket" value="{{ $paket->getId() }}"
                                         hidden>
                                     <input type="text" name="qty" id="qty_input" value="1" hidden>
+                                    <div id="modalAlert" class="hidden  w-full bg-red-500 p-4 mb-2 text-white">
+
+                                    </div>
                                     <div class="flex flex-col gap-2">
                                         <div class="flex flex-col gap-2">
                                             <label for="name" class="text-gray-900 dark:text-white">Nama
@@ -221,8 +229,16 @@
         let qty = document.getElementById('qty')
         let qty_input = document.getElementById('qty_input')
         let total = document.getElementById('total')
+        let quota = document.getElementById('quota')
+        let modalAlert = document.getElementById('modalAlert')
 
         add.addEventListener('click', () => {
+            if (parseInt(qty.innerHTML) == parseInt(quota.value)) {
+                modalAlert.innerHTML = `Paket ini hanya tersedia untuk ${quota.value} orang`
+                modalAlert.classList.remove('hidden')
+                return
+            }
+
             qty.innerHTML = parseInt(qty.innerHTML) + 1
             qty_input.value = parseInt(qty_input.value) + 1
             total.innerHTML =

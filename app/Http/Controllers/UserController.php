@@ -95,7 +95,9 @@ class UserController extends Controller
         // Set 3DS transaction for credit card to true
         \Midtrans\Config::$is3ds = true;
 
-        $harga = PaketTravel::findOrFail($request->paket)['harga_212396'] * $request->qty;
+        $paket = PaketTravel::findOrFail($request->paket);
+        $harga = $paket['harga_212396'] * $request->qty;
+
         $kode = rand();
 
         $params = array(
@@ -112,6 +114,12 @@ class UserController extends Controller
 
         // dd($request->all(), $params, $snapToken);
         $user = Auth::user();
+
+        // KUOTA
+        $kuota = $paket['kuota_212396'] - $request->qty;
+        $paket->update([
+            'kuota_212396' => $kuota
+        ]);
 
         Transaksi::create([
             'id_paket_212396' => $request->paket,

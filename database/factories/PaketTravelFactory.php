@@ -28,6 +28,7 @@ class PaketTravelFactory extends Factory
             'lokasi_212396' => fake()->city(),
             'rating_212396' => fake()->numberBetween(1, 5),
             'durasi_212396' => fake()->numberBetween(1, 5),
+            'kuota_212396' => fake()->numberBetween(1, 10),
         ];
     }
 }
